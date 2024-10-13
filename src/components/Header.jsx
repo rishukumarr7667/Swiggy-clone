@@ -22,7 +22,8 @@ export default function Header(){
             },
             {
                 icon:<CiDiscount1 />,
-                name:"Offer"
+                name:"Offer",
+                sup:"New"
             },
             {
                 icon:<IoMdHelpCircleOutline />,
@@ -70,6 +71,7 @@ export default function Header(){
                             return <li key={index} className=' cursor-pointer flex hover:text-[#2ecc71] items-center gap-2'>
                                 {link.icon}
                                 {link.name}
+                               <sup>{link.sup}</sup>
                             </li>
                         }
                     )
