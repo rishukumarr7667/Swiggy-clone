@@ -19,21 +19,26 @@ export default function TopRestaurant() {
   }, []);
 
   return (
-    <div className="flex flex-wrap">
-      {restaurants.map((restaurant, index) => (
-        <Card
-          key={index}
-          width="w-full md:w-1/3 p-4" 
-          image={restaurant.image}
-          offer={restaurant.offer}
-          title={restaurant.title}
-          rating={restaurant.rating}
-          minTime={restaurant.minTime}
-          maxTime={restaurant.maxTime}
-          name={restaurant.name}
-          place={restaurant.place}
-        />
-      ))}
+    <div className="max-w-[1200px] mx-auto px-2">
+      <div className="text-[25px] font-bold">
+        Top restaurant chains in Nalanda
+      </div>
+      <div className="flex flex-wrap">
+        {restaurants.map((restaurant, index) => (
+          <Card
+            key={index}
+            width="w-full md:w-1/3 p-4"
+            image={restaurant.image}
+            offer={restaurant.offer}
+            title={restaurant.title}
+            rating={restaurant.rating}
+            minTime={restaurant.minTime}
+            maxTime={restaurant.maxTime}
+            name={restaurant.name}
+            place={restaurant.place}
+          />
+        ))}
+      </div>
     </div>
   );
 }
