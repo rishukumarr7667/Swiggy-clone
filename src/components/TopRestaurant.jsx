@@ -1,53 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
-import Card from './Card';
+import React, { useEffect, useState } from "react";
+import Card from "./Card"; // Adjust the path if necessary
 
-export default function TopRestaurant(){
-  const [data,setData]= useState([]);
+export default function TopRestaurant() {
+  const [restaurants, setRestaurants] = useState([]);
 
-  const fetchTopRestaurant = async () => {
-    const response = await fetch('image link');
-    const apiData = await response.json();
-    setData(apiData);
-  }
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const response = await fetch("/restaurantChains.json");
+        const data = await response.json();
+        setRestaurants(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  useEffect(
-    () => {
-      fetchTopRestaurant();
-    },[]
-  )
-    return(
-      <div className="max-w-[1200px] mx-auto px-2 ">
-      <div className="flex my-3 items-center justify-between">
-        <div className="text-[25px] font-bold">Top restaurant chains in Nalanda</div>
-        <div className="flex ">
-          <div
-           
-            className="flex justify-center items-center w-[30px] h-[30px] bg-[#e2e2e7] rounded-full mx-2 cursor-pointer hover:text-[#16a085]"
-          >
-            <FaLongArrowAltLeft />
-          </div>
-          <div
-            
-            className="flex justify-center items-center w-[30px] h-[30px] bg-[#e2e2e7] rounded-full mx-2 cursor-pointe hover:text-[#16a085]"
-          >
-            <FaLongArrowAltRight />
-          </div>
-        </div>
-      </div>
-      <div className='flex gap-5 overflow-hidden'>
-        {
-          data.map(
-            (d,i)=>{
-              return <Card width="w-full md:w-[273px]" {...d} key={i}/>
-            }
-          )
-        }
-        
-      </div>
-      <Card/>
-      
-      <hr className="my-2 border-[1px]"/>
-      </div>
-    )
+    fetchRestaurants();
+  }, []);
+
+  return (
+    <div className="flex flex-wrap">
+      {restaurants.map((restaurant, index) => (
+        <Card
+          key={index}
+          width="w-full md:w-1/3 p-4" 
+          image={restaurant.image}
+          offer={restaurant.offer}
+          title={restaurant.title}
+          rating={restaurant.rating}
+          minTime={restaurant.minTime}
+          maxTime={restaurant.maxTime}
+          name={restaurant.name}
+          place={restaurant.place}
+        />
+      ))}
+    </div>
+  );
 }
