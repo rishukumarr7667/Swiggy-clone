@@ -23,39 +23,39 @@ export default function Category() {
   }, []);
 
   const handlePrev = () => {
-    setSlide((prev) => Math.max(prev - 1, 0));
+    setSlide((prev) => Math.max(prev - 3, 0));
   };
 
   const handleNext = () => {
-    setSlide((prev) => Math.min(prev + 1, categories.length - 1));
+    setSlide((prev) => Math.min(prev + 3, categories.length - 1));
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto">
+    <div className="max-w-[1200px] mx-auto px-2">
       <div className="flex my-3 items-center justify-between">
         <div className="text-[25px] font-bold">What's On Your Mind?</div>
-        <div className="flex">
+        <div className="flex ">
           <div
             onClick={handlePrev}
-            className="flex justify-center items-center w-[30px] h-[30px] bg-[#e2e2e7] rounded-full mx-2 cursor-pointer"
+            className="flex justify-center items-center w-[30px] h-[30px] bg-[#e2e2e7] rounded-full mx-2 cursor-pointer hover:text-[#16a085]"
           >
             <FaLongArrowAltLeft />
           </div>
           <div
             onClick={handleNext}
-            className="flex justify-center items-center w-[30px] h-[30px] bg-[#e2e2e7] rounded-full mx-2 cursor-pointer"
+            className="flex justify-center items-center w-[30px] h-[30px] bg-[#e2e2e7] rounded-full mx-2 cursor-pointe hover:text-[#16a085]"
           >
             <FaLongArrowAltRight />
           </div>
         </div>
       </div>
-      <div className="flex border border-red-600 overflow-hidden">
+      <div className="flex  overflow-hidden">
         <div
           style={{ transform: `translateX(-${slide * 150}px)` }}
           className="flex duration-500"
         >
           {categories.map((cat, index) => (
-            <div key={cat.path} className="w-[150px] shrink-0">
+            <div key={cat.path} className="w-[120px] shrink-0">
               <img
                 src={`/images/${cat.image}`}
                 alt={cat.path}
@@ -65,6 +65,7 @@ export default function Category() {
           ))}
         </div>
       </div>
+      <hr className="my-6 border-[1px]"/>
     </div>
   );
 }
